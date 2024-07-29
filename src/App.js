@@ -1,25 +1,50 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import ComparisonTable from './ComparisonTable';
+import ProductCard from './ProductCard';
+import config from './config';
 
-function App() {
+
+function AppFruits() {
+  const [products, setProducts] = useState([
+    {
+      imageUrl : "avocados.jpg",
+      name : "Avocados",
+      price : 2.99
+    },
+    {
+      imageUrl : "cherries.jpg",
+      name : "Cherries",
+      price : 2.99
+    },
+    {
+      imageUrl : "watermelon.jpg",
+      name : "Watermelon",
+      price : 2.99
+    }
+  ]);
+
+  // useEffect( () => {
+
+  //   fetch( config.API_ROOT_PATH +"/all" )
+  //   .then( response => response.json() )
+  //   .then( json => setProducts( json ))
+  //   .catch( e => console.error(e));
+
+  //   console.log("Promisas paleistas");
+  // }, [] );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>Compare Products</h1>
+      <div className="product-list">
+        {products.map(product => (
+          <ProductCard key={product.name} product={product} />
+        ))}
+      </div>
+          <ComparisonTable products={products} />
     </div>
   );
 }
 
-export default App;
+export default AppFruits;
